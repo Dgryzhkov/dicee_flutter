@@ -23,40 +23,40 @@ _DicePageState createState() => _DicePageState();
 
 class _DicePageState extends State<DicePage> {
   int leftDiceNumber = 1;
-  int rightDiceNumber =1;
+  int rightDiceNumber = 1;
+
   @override
   Widget build(BuildContext context) {
-      return Center(
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: FlatButton(
-                onPressed: () {
-                  setState(() {
-                    leftDiceNumber = Random().nextInt(6)+1;
-                    print('$leftDiceNumber');
-                  });
-                  },
-                child: Image.asset('images/dice$leftDiceNumber.png'),
-              ),
+    return Center(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: FlatButton(
+              child: Image.asset('images/dice$leftDiceNumber.png'),
+              onPressed: rollDices(),
             ),
-            Expanded(
-              child: FlatButton(
-                onPressed: () {
-                  setState(() {
-                    rightDiceNumber = Random().nextInt(6)+1;
-                    print('$rightDiceNumber');
-                  });
-                },
-                child: Image.asset('images/dice$rightDiceNumber.png'),
-              ),
+          ),
+          Expanded(
+            child: FlatButton(
+              child: Image.asset('images/dice$rightDiceNumber.png'),
+              onPressed:rollDices(),
             ),
-          ],
-        ),
-      );
-    }
+          ),
+        ],
+      ),
+    );
   }
 
+
+  VoidCallback rollDices() {
+    return () {
+      setState(() {
+        rightDiceNumber = Random().nextInt(6) + 1;
+        leftDiceNumber = Random().nextInt(6) + 1;
+      });
+    };
+  }
+}
 
 
 
